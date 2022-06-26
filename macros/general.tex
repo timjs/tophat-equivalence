@@ -112,10 +112,14 @@
 %% Citations %%
 %% NOTE: requires `natbib`
 
-\let\cite\citep
-\let\Cite\Citep
-\let\textcite\citet
-\let\Textcite\Citet
+%% Workaround for Springer numbering
+\let\citep\cite
+\let\citet\UNDEFINED
+
+% \let\cite\citep
+% \let\Cite\Citep
+% \let\textcite\citet
+% \let\Textcite\Citet
 
 
 %% Blocks and Boxes %%
