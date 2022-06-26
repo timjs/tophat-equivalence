@@ -2,12 +2,14 @@ Todos
 
 # General
 
-* [ ] Mail over 20p.
-* [ ] OpenAccess aan Nico.
-* [ ] Mark both authors as corresponding. => How?
-* [ ] Make acknowledgements inline heading.
-* [ ] Rename appendix to "Appendix"
+* [x] Mail over 20p.
+* [x] OpenAccess aan Nico.
+* [x] Mark both authors as corresponding.
+* [x] Make acknowledgements inline heading.
+* [x] Rename appendix to "Appendix"
 * [ ] Add grammars to appendix?
+* [x] Fix citations
+* [x] OrcID
 
 # Review 1 (2)
 
