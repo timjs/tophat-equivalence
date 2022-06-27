@@ -80,8 +80,8 @@ However, this knowledge is not immediately transferable to the world of tasks.
 There, we need to take the semantics of task constructs into account.
 
 \startexample[exm:task-absolute-value]{Task equivalence}
-  The next two tasks both ask end users to enter an integer,
-  and thereafter show the absolute value of the given integer:
+  The next two tasks both ask end users to enter an integer (using $\Enter$),
+  and thereafter (using $\Step$) show the absolute value of the given integer (using $\View$):
   \startformulas[align]
     \NC t_1 \NC:=\NC \Enter\Int \Step \lambda x:\Int.\ \Ite{x < 0}{\View (-x)}{\View x}    \NR
     \NC t_2 \NC:=\NC \Enter\Int \Step \lambda y:\Int.\ \Ite{y \geq 0}{\View y}{\View (-y)} \NR
@@ -96,8 +96,8 @@ There, we need to take the semantics of task constructs into account.
 % \stopquotation
 
 If we can define such a notion of semantic equivalence for task-oriented programs, what interesting properties can we prove (or disprove)?
-If we know that one task-oriented program is semantically equivalent to another, then we know that we can substitute one for the other, without changing the meaning of the program.
-Which in turn could be useful for doing compiler optimizations.
+If we know that one task-oriented program is semantically equivalent to another, then we know that we can substitute one for the other, without changing the meaning of the program,
+which in turn could be useful for doing compiler optimizations.
 An example of such optimisations is whether the monad laws hold for the step combinator ($\Step$) used in above example.
 Showing that certain equalities hold for task-oriented programs could also prove useful for the \ITASKS\ system in the future.
 

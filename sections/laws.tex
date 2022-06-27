@@ -10,6 +10,12 @@
 Now that we have a definition of semantic equivalence for \TOPHAT-programs, we can look at some interesting properties.
 This section gives some transformation properties that hold (or not) for task equivalence.
 
+Whenever we write a task equivalence, we implicitly universally quantify over tasks $t$.
+So $t_1 \taskequiv t_2$, where tasks $t_1$ and $t_2$ contain task $t$, should be read as $\forall t:\Task. t_1 \taskequiv t_2$.
+Moreover, whenever we write a task inequivalence, then we mean that there exists at least one task $t$ for which the equivalence does not hold.
+So $t_1 \ntaskequiv t_2$, where tasks $t_1$ and $t_2$ contain task $t$, should be read as $\neg\forall t:\Task. t_1 \taskequiv t_2$, or $\exists t:\Task. t_1 \ntaskequiv t_2$.
+For some (in)equalities we may use additional tasks, expressions, or functions, in which case these (in)equalities should be interpreted in the same way.
+
 
 % \subsection{Transform}
 %
@@ -104,6 +110,8 @@ we can formulate laws which are inspired by the monoidal functor formulation of 
   If we take $t = \Fail$ for the left and right identity laws,
   then in both cases we have that the right-hand side is a failing task, but the left-hand side is stuck.
   Pairing requires that both sides fail before it fails itself.
+  If only one side fails in a pairing, for example with $\Fail \Pair t$ for $t$ a non-failing task,
+  then $\Fail \Pair t$ can still interact with end users if $t$ can, and thus the pairing should not fail if only one side fails.
   Therefore, both the left and right identity laws do not hold.
   %the $\Task$ constructor on types does not form a monoidal functor.
 

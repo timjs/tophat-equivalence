@@ -16,6 +16,7 @@ We will present the main components of the task language, which is embedded into
 
 \subsection{Editors}
 
+An editor is a task holding a value.
 Editors allow end users to interact with the system by entering and changing information.
 When a user sends an input event to an editor, the editor will update its current value to reflect the change.
 There are no output events.
@@ -40,6 +41,8 @@ There are three types of editors in \TOPHAT:
     \emph{Shared editors} ($\Change^k h$) watch heap locations $h$.
     They allow the user to view and change shared values.
     Whenever a shared editor is updated, all shared editors watching the same heap location $h$ will be updated as well.
+    To create a heap location to an expression $e$, we write $\Share e$.
+    Reference assignment ($e_1 \Assign e_2$) allows the system to assign a new value to a heap location.
 \stopitemize
 
 % \input{sections/fig-editors}
@@ -210,21 +213,27 @@ Values $v$ can be lambda functions, pairs of values, unit, constants, locations,
 Basic values $b$ are a subset of values $v$ that are of basic type $\beta$.
 We denote the evaluation of expression $e$ to the value $v$ by $e \evaluate v$.
 
-After evaluation is done, a task is ready to be \emph{fixated}.
-Fixation is a big-step semantics that is responsible for reducing tasks until they are ready to accept input.
-We write $t,\sigma,\delta \fixate t',\sigma'$ to denote the fixation of task $t$
-in state $\sigma$ given the dirty set $\delta$, results into task $t'$ in state $\sigma'$.
-The set $\delta'$ contains all heap locations whose value has been changed while fixation took place.
+After evaluation is done, a task is ready to be \emph{normalised}.
+Normalisation is a big-step semantics that is responsible for reducing tasks until they are ready to accept input.
+We write $t, \sigma \normalise t', \sigma', \delta'$ to denote the normalisation of task $t$ in state $\sigma$ to task t' in state $\sigma'$.
 The state $\sigma$ is a mapping from heap locations to basic values.
 It keeps track of all references created so far, and what value they currently hold.
-Fixation makes use of \emph{normalisation}, which is a helper semantics.
+Additionally, normalisation returns a set $\delta'$, which we will call a dirty set,
+containing all heap locations whose value has been changed while normalisation took place.
+It will be used in the \emph{fixation} semantics, which is defined on top of normalisation.
+Due to mutable references, the fixation semantics is required to make sure that a task is fully normalised before any user interaction is allowed.
+Fixation makes use of normalisation as a helper semantics.
+We write $t, \sigma, \delta \fixate t', \sigma'$ to denote the fixation of task $t$ in state $\sigma$ given the dirty set $\delta$, to task $t'$ in state $\sigma'$.
 
-Input events are handled by the \emph{interaction} semantics.
-For the interaction semantics, we write $t,\sigma \interact{\iota} t',\sigma'$ to denote that
-task $t$ in state $\sigma$ transitions to task $t'$ in state $\sigma'$ after the user input $\iota$.
-The interaction semantics makes use of a helper \emph{handling} semantics,
+Input events are handled by the handling and interaction semantics.
+Both semantics are small-step semantics that take an user input $\iota$ for each step.
+For the \emph{handling} semantics, we write $t,\sigma \handle{\iota} t',\sigma',\delta'$
+to denote that handling the user input $\iota$ in task $t$ and state $\sigma$ results in task $t'$ and state $\sigma'$.
+Similar to the normalisation semantics, the handling semantics also returns a dirty set $\delta'$.
+The \emph{interaction} semantics then makes use the helper handling semantics,
 and the previously mentioned fixation semantics to make sure that, after user interaction,
 a task is fully reduced and ready to accept the next input.
+For the \emph{interaction} semantics, we write $t,\sigma \interact{\iota} t',\sigma'$ to denote that task $t$ in state $\sigma$ transitions to task $t'$ in state $\sigma'$ after the user input $\iota$.
 For further details we refer to \cite[Steenvoorden22].
 
 % %, whose rules are given in the appendix.
