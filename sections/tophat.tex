@@ -222,7 +222,7 @@ Normalisation is a big-step semantics that is responsible for reducing tasks unt
 We write $t, \sigma \normalise t', \sigma', \delta'$ to denote the normalisation of task $t$ in state $\sigma$ to task t' in state $\sigma'$.
 The state $\sigma$ is a mapping from heap locations to basic values.
 It keeps track of all references created so far, and what value they currently hold.
-Additionally, normalisation returns a set $\delta'$, which we will call a dirty set,
+Additionally, normalisation returns a set $\delta'$, which we will call a \emph{dirty set},
 containing all heap locations whose value has been changed while normalisation took place.
 It will be used in the \emph{fixation} semantics, which is defined on top of normalisation.
 Due to mutable references, the fixation semantics is required to make sure that a task is fully normalised before any user interaction is allowed.
