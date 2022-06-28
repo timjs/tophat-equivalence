@@ -153,6 +153,10 @@ It is equivalent to $\Fail$.
 To capture what tasks are failing we introduce the failing observation $\Failing$, which is defined in \see[fig:observation-failing-inputs].
 Failing is especially useful when used in combination with the step combinator,
 as we have seen in \see[exm:coffee-machine].
+Note that if only one side fails in a pairing,
+for example with $\Fail \Pair t$ for $t$ a non-failing task,
+then $\Fail \Pair t$ can still interact with end users if $t$ can.
+Therefore the pairing should not fail if only one side fails.
 
 % \placefigure[][fig:o-failing]
 %   {Failing observation on tasks}
