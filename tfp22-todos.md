@@ -7,7 +7,6 @@ Todos
 * [x] Mark both authors as corresponding.
 * [x] Make acknowledgements inline heading.
 * [x] Rename appendix to "Appendix"
-* [ ] Add grammars to appendix?
 * [x] Fix citations
 * [x] OrcID
 
